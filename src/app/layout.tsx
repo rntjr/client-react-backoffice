@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { ThemeProvider } from '@/components/theme-provider'
 import { ReactNode } from 'react'
+import NavbarRoot from '@/components/navbar/navbar-root'
 
 export const metadata: Metadata = {
   title: 'Backoffice',
@@ -13,6 +14,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <NavbarRoot />
           {children}
         </ThemeProvider>
       </body>
