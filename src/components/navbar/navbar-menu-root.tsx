@@ -1,10 +1,22 @@
 import { ReactNode } from 'react'
+import { cn } from '@/lib/utils'
 
 interface NavbarMenuRootProps {
   children: ReactNode
+  className?: string
 }
-export function NavbarMenuRootComponent({ children }: NavbarMenuRootProps) {
+export function NavbarMenuRootComponent({
+  children,
+  className,
+}: NavbarMenuRootProps) {
   return (
-    <nav className="flex items-center space-x-4 lg:space-x-6">{children}</nav>
+    <nav
+      className={cn(
+        'hidden items-center space-x-4 lg:flex lg:space-x-6',
+        className,
+      )}
+    >
+      {children}
+    </nav>
   )
 }
