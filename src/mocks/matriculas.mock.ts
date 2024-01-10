@@ -1,4 +1,4 @@
-import { MatriculaType } from '@/models/matricula/matricula.model'
+import { MatriculaType } from '@/types/matricula/matricula.model'
 import { SexoEnum } from '@/enumaration/sexo.enum'
 import { UnidadeFederativaEnum } from '@/enumaration/unidade-federativa.enum'
 
@@ -6,10 +6,15 @@ export const matriculasMock: MatriculaType[] = [
   {
     id: '52e44334-27d2-4cba-88aa-8c1ff5afbf20',
     ativo: true,
-    numeroMatricula: '1',
+    numeroMatricula: '13456',
     dataAdmissao: new Date('2023-12-01'),
     dataPosse: new Date('2023-02-01'),
     dataNomeacao: new Date('2023-02-01'),
+    decreto: {
+      ano: 2023,
+      numero: '103404',
+      dataDecreto: new Date('2023-01-27'),
+    },
     pessoa: {
       id: 'e6820e63-cc0a-4f5c-8130-bd1e88457d30',
       urlFoto: 'https://avatars.githubusercontent.com/u/48002341?v=4',
@@ -67,7 +72,7 @@ export const matriculasMock: MatriculaType[] = [
   {
     id: '134be9df-fa77-4d7a-b6b8-7d1025064fff',
     ativo: false,
-    numeroMatricula: '2',
+    numeroMatricula: '27856',
     dataAdmissao: new Date('2023-02-02'),
     dataPosse: new Date('2023-02-01'),
     dataNomeacao: new Date('2023-02-01'),

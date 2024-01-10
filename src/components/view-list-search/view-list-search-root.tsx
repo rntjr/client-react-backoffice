@@ -6,5 +6,5 @@ interface ViewListSearchRootProps {
 }
 
 export function ViewListSearchRoot({ children }: ViewListSearchRootProps) {
-  return <div className="grid grid-cols-1 gap-4 lg:grid-cols-4">{children}</div>
+  return <div className="grid grid-cols-1">{children}</div>
 }

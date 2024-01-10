@@ -4,7 +4,7 @@ import { CarteiraNacionalHabilitacaoSchema } from '../documentos/carteira-nacion
 import { NacionalidadeSchema } from './nacionalidade.model'
 import { TituloEleitorSchema } from '../documentos/titulo-eleitor.model'
 import { EscolaridadeSchema } from './escolaridade.model'
-import { EnderecoSchema } from '@/models/common/endereco.model'
+import { EnderecoSchema } from '@/types/common/endereco.model'
 import { SexoEnum } from '@/enumaration/sexo.enum'
 import { z } from 'zod'
 import { EstadoCivilEnum } from '@/enumaration/estado-civil.enum'

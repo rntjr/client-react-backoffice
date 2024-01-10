@@ -1,6 +1,6 @@
-import { OrganogramaSchema } from '@/models/organograma/organograma.model'
+import { OrganogramaSchema } from '@/types/organograma/organograma.model'
 import { z } from 'zod'
-import { CboSchema } from '@/models/cargo/cbo.model'
+import { CboSchema } from '@/types/cargo/cbo.model'
 
 export const CargoSchema = z.object({
   id: z.string(),

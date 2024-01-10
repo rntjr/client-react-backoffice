@@ -1,4 +1,4 @@
-import { PessoaSchema } from '@/models/matricula/pessoa.model'
+import { PessoaSchema } from '@/types/matricula/pessoa.model'
 import { z } from 'zod'
 import { GrauDependenciaEnum } from '@/enumaration/grau-dependencia.enum'
 import { EstadoCivilEnum } from '@/enumaration/estado-civil.enum'

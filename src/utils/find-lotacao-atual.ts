@@ -1,9 +1,9 @@
-import { MatriculaModel } from '@/models/matricula/matricula.model'
+import { MatriculaType } from '@/types/matricula/matricula.model'
 
-export function findLotacaoAtual({ lotacoes }: MatriculaModel) {
+export function findLotacaoAtual({ lotacoes }: MatriculaType) {
   if (typeof lotacoes !== undefined && lotacoes?.length > 0)
     return lotacoes
-      .find((item) => item.atual)
+      .find(({ atual }) => atual)
       ?.organograma.descricao.toUpperCase()
   return 'Lotação não encontrado'.toUpperCase()
 }

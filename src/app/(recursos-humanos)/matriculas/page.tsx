@@ -1,184 +1,147 @@
 'use client'
-import { ViewListSearch } from '@/components/view-list-search'
-import { Button } from '@/components/ui/button'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { PlusIcon } from '@radix-ui/react-icons'
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
-import { Label } from '@/components/ui/label'
 import { matriculasMock } from '@/mocks/matriculas.mock'
-import { Badge } from '@/components/ui/badge'
-import Link from 'next/link'
+import { DataTable, DataTableColumnHeader } from '@/components/ui/data-table'
+import { ColumnDef } from '@tanstack/react-table'
+import { MatriculaType } from '@/types/matricula/matricula.model'
+import { Checkbox } from '@/components/ui/checkbox'
 import { findLotacaoAtual } from '@/utils/find-lotacao-atual'
 import { findCargoAtual } from '@/utils/find-cargo-atual'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { Button } from '@/components/ui/button'
+import { DotsHorizontalIcon } from '@radix-ui/react-icons'
+import { Badge } from '@/components/ui/badge'
+import Link from 'next/link'
 
 const matriculas = matriculasMock
 
-const filtroMatriculaSchema = z.object({
-  matricula: z.number().optional(),
-  nome: z.number().optional(),
-})
-
-type FiltroMatriculaValues = z.infer<typeof filtroMatriculaSchema>
-
-const defaultValues: Partial<FiltroMatriculaValues> = {
-  matricula: undefined,
-  nome: undefined,
-}
+const columns: ColumnDef<MatriculaType>[] = [
+  {
+    id: 'select',
+    header: ({ table }) => {
+      const checked =
+        table.getIsAllPageRowsSelected() ||
+        (table.getIsSomePageRowsSelected() && 'indeterminate')
+      return (
+        <Checkbox
+          checked={checked}
+          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+          aria-label="Select all"
+          className="translate-y-[2px]"
+        />
+      )
+    },
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+        className="translate-y-[2px]"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    accessorKey: 'numeroMatricula',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Matricula" />
+    ),
+    cell: ({ row }) => (
+      <div className="w-[80px]">{row.original.numeroMatricula}</div>
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    accessorKey: 'nomeCompleto',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Nome" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <Link href={`/matriculas/${row.original.id}`}>
+          <div className="flex space-x-2">
+            <Badge variant={row.original.ativo ? 'success' : 'destructive'}>
+              {row.original.ativo ? 'Ativo' : 'Inativo'}
+            </Badge>
+            <span className="max-w-[500px] truncate font-medium">
+              {row.original.pessoa.nomeCompleto}
+            </span>
+          </div>
+        </Link>
+      )
+    },
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    accessorKey: 'cpf',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="CPF" />
+    ),
+    cell: ({ row }) => {
+      return <div>{row.original.pessoa.cpf}</div>
+    },
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    accessorKey: 'cargos',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Cargo" />
+    ),
+    cell: ({ row }) => {
+      return <div>{findCargoAtual({ cargos: row.original.cargos })}</div>
+    },
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    accessorKey: 'lotacoes',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Lotação" />
+    ),
+    cell: ({ row }) => {
+      return <div>{findLotacaoAtual({ lotacoes: row.original.lotacoes })}</div>
+    },
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    id: 'actions',
+    cell: ({ row }) => (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant="ghost"
+            className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
+          >
+            <DotsHorizontalIcon className="h-4 w-4" />
+            <span className="sr-only">Open menu</span>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-[160px]">
+          <Link href={`/matriculas/${row.original.id}`}>
+            <DropdownMenuItem>Editar</DropdownMenuItem>
+          </Link>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>Excluir</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    ),
+  },
+]
 
 export default function MatriculasPage() {
-  const form = useForm<FiltroMatriculaValues>({
-    resolver: zodResolver(filtroMatriculaSchema),
-    defaultValues,
-    mode: 'onChange',
-  })
-
-  function onSubmit(data: FiltroMatriculaValues) {
-    console.log(data)
-  }
-
   return (
-    <ViewListSearch.Root>
-      <ViewListSearch.Filter>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="matricula"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Matricula</FormLabel>
-                  <FormControl>
-                    <Input placeholder="1122333" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="nome"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Nome</FormLabel>
-                  <FormControl>
-                    <Input placeholder="FULANO DE TAL" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <div className="flex space-x-4">
-              <Button variant={'ghost'} className="ml-auto">
-                Limpar
-              </Button>
-              <Button variant={'ghost'} type="submit" className="ml-auto">
-                Pesquisar
-              </Button>
-            </div>
-          </form>
-        </Form>
-      </ViewListSearch.Filter>
-      <ViewListSearch.Data.Root>
-        <ViewListSearch.Data.Header>
-          <ViewListSearch.Data.Title>
-            Total: 10 registros.
-          </ViewListSearch.Data.Title>
-
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button variant={'success'}>
-                <PlusIcon className="mr-2 h-4 w-4" />
-                Nova Matricula
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
-              <DialogHeader>
-                <DialogTitle>Novo Empenho</DialogTitle>
-              </DialogHeader>
-              <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="name" className="text-right">
-                    Name
-                  </Label>
-                  <Input
-                    id="name"
-                    value="Pedro Duarte"
-                    className="col-span-3"
-                  />
-                </div>
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="username" className="text-right">
-                    Username
-                  </Label>
-                  <Input
-                    id="username"
-                    value="@peduarte"
-                    className="col-span-3"
-                  />
-                </div>
-              </div>
-              <DialogFooter>
-                <Button type="submit">Save changes</Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-        </ViewListSearch.Data.Header>
-        <ViewListSearch.Data.Content>
-          {matriculas.map((matricula) => (
-            <Link href={`/matriculas/${matricula.id}`} key={matricula.id}>
-              <div className="group rounded-lg p-4 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                <div className="flex flex-col place-items-center space-y-1 lg:flex-row lg:place-items-start lg:space-x-2 lg:space-y-0">
-                  <Badge variant={'default'} size={'sm'}>
-                    {`${matricula.numeroMatricula}`}
-                  </Badge>
-                  <div className="space-y-1 text-center lg:text-start">
-                    <div className="flex flex-col items-center space-y-1 lg:flex-row lg:space-x-2 lg:space-y-0">
-                      <p className="text-md font-bold leading-none">
-                        {`${matricula.pessoa.nomeCompleto.toUpperCase()}`}
-                      </p>
-                      <p className="text-sm font-normal leading-none text-muted-foreground">
-                        {`${matricula.pessoa.cpf}`}
-                      </p>
-                      <p className="text-sm font-medium leading-none text-muted-foreground">
-                        {`${matricula.ativo ? 'ATIVO' : 'INATIVO'}`}
-                      </p>
-                    </div>
-                    <p className="text-md truncate leading-none text-muted-foreground">
-                      {findLotacaoAtual(matricula)}
-                    </p>
-                    <p className="text-md truncate leading-none text-muted-foreground">
-                      {findCargoAtual(matricula)}
-                    </p>
-                  </div>
-                  <div className="text-center lg:flex-grow lg:truncate lg:text-end">
-                    <small className="font-light text-muted-foreground">
-                      {matricula.id}
-                    </small>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </ViewListSearch.Data.Content>
-      </ViewListSearch.Data.Root>
-    </ViewListSearch.Root>
+    <div>
+      <DataTable data={matriculas} columns={columns} />
+    </div>
   )
 }

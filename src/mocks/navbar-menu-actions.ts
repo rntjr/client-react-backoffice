@@ -1,6 +1,4 @@
-import { NavbarMenuActionProps } from '@/components/navbar/navbar-menu-action'
-
-export const actionsMocks: NavbarMenuActionProps[] = [
+export const actionsMocks: any[] = [
   {
     name: 'Recursos Humanos',
     items: [

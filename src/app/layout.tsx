@@ -2,7 +2,8 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { ThemeProvider } from '@/components/theme-provider'
 import { ReactNode } from 'react'
-import NavbarRoot from '@/components/navbar/navbar-root'
+import { NavbarComponent } from '@/components/navbar'
+import { Sidenav } from '@/components/sidenav'
 
 export const metadata: Metadata = {
   title: 'Backoffice',
@@ -12,10 +13,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className="overflow-visible" suppressHydrationWarning={true}>
+      <body
+        className="bg-gray-100 dark:bg-gray-950"
+        suppressHydrationWarning={true}
+      >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <NavbarRoot />
-          {children}
+          <NavbarComponent.Root />
+          <Sidenav.Root />
+          <div className="p-0 xl:ml-64">{children}</div>
         </ThemeProvider>
       </body>
     </html>
