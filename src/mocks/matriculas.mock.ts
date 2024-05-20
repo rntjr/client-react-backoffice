@@ -1,6 +1,52 @@
 import { MatriculaType } from '@/types/matricula/matricula.model'
 import { SexoEnum } from '@/enumaration/sexo.enum'
 import { UnidadeFederativaEnum } from '@/enumaration/unidade-federativa.enum'
+import { PessoaType } from '@/types/matricula/pessoa.model'
+
+export const pessoasMock: PessoaType[] = [
+  {
+    id: 'e6820e63-cc0a-4f5c-8130-bd1e88457d30',
+    urlFoto: 'https://avatars.githubusercontent.com/u/48002341?v=4',
+    nomeCompleto: 'Renato Franco Boachaques Junior',
+    cpf: '457.212.678-01',
+    numeroIdentidade: '37.917.528-9',
+    dataNascimento: new Date('2000-04-10'),
+    sexo: SexoEnum.enum.MASCULINO,
+    nomeMae: 'Alice Andreia Rita',
+    cep: '18405-100',
+    logradouro: 'Rua Leovigildo de Almeida Camargo',
+    numeroEndereco: '283',
+    bairro: 'Jardim Ferrari',
+    cidade: 'Itapeva',
+    uf: UnidadeFederativaEnum.enum.SAO_PAULO,
+    contato: [
+      {
+        id: 'cb4cf152-3e9e-4306-bb7b-aa148b2cded8',
+        tipo: {
+          id: 'b6c3d5e5-4dba-45ee-b89e-4d82d67b2112',
+          descricao: 'Telefone',
+        },
+        descricao: '+55 (62) 9 9997-4733',
+      },
+    ],
+  },
+  {
+    id: 'a9008545-dc8c-46e7-aed4-ee2a1fa5e862',
+    urlFoto: 'https://avatars.githubusercontent.com/u/31322421?v=4',
+    nomeCompleto: 'Marcelo Pereira da Silva',
+    cpf: '816.510.878-65',
+    numeroIdentidade: '32.717.581-3',
+    dataNascimento: new Date('2005-05-14'),
+    sexo: SexoEnum.enum.MASCULINO,
+    nomeMae: 'Camila Natália',
+    cep: '18401-470',
+    logradouro: 'Rua das Margaridas',
+    numeroEndereco: '692',
+    bairro: 'Jardim Belvedere',
+    cidade: 'Itapeva',
+    uf: UnidadeFederativaEnum.enum.SAO_PAULO,
+  },
+]
 
 export const matriculasMock: MatriculaType[] = [
   {

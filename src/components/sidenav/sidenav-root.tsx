@@ -24,7 +24,7 @@ export const SidenavRoot = () => {
       children: [
         {
           label: 'Pessoa Física',
-          path: '/',
+          path: '/pessoa',
         },
         {
           label: 'Matriculas',

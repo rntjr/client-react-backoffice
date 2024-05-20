@@ -9,6 +9,8 @@ import { SexoEnum } from '@/enumaration/sexo.enum'
 import { z } from 'zod'
 import { EstadoCivilEnum } from '@/enumaration/estado-civil.enum'
 import { CorRacaEnum } from '@/enumaration/cor-raca.enum'
+import { ContatoSchema } from '@/types/common/contato.model'
+import { DependenteSchema } from '@/types/matricula/dependente.model'
 
 export const PessoaSchema = z
   .object({
@@ -19,7 +21,7 @@ export const PessoaSchema = z
     /**
      * Foto de Perfil
      */
-    urlFoto: z.string().optional(),
+    urlFoto: z.string().nullish(),
     /**
      * Nome completo
      */
@@ -27,7 +29,7 @@ export const PessoaSchema = z
     /**
      * Nome social
      */
-    nomeSocial: z.string().optional(),
+    nomeSocial: z.string().nullish(),
     /**
      * Nome da mae
      */
@@ -47,19 +49,23 @@ export const PessoaSchema = z
     /**
      * Estado civil
      */
-    estadoCivil: EstadoCivilEnum.optional(),
+    estadoCivil: EstadoCivilEnum.nullish(),
     /**
      * Cor Raca
      */
-    corRaca: CorRacaEnum.optional(),
+    corRaca: CorRacaEnum.nullish(),
     /**
      * CID PcD
      */
-    cidPcD: z.string().optional(),
+    cidPcD: z.string().nullish(),
     /**
      * Tipo PcD
      */
-    tipoPcD: z.string().optional(),
+    tipoPcD: z.string().nullish(),
+    /**
+     * Contato
+     */
+    contato: z.array(ContatoSchema).nullish(),
   })
   .merge(EnderecoSchema)
   .merge(CarteiraTrabalhoSchema)
@@ -68,3 +74,5 @@ export const PessoaSchema = z
   .merge(TituloEleitorSchema)
   .merge(NacionalidadeSchema)
   .merge(EscolaridadeSchema)
+
+export type PessoaType = z.infer<typeof PessoaSchema>

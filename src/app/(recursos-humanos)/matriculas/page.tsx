@@ -139,9 +139,5 @@ const columns: ColumnDef<MatriculaType>[] = [
 ]
 
 export default function MatriculasPage() {
-  return (
-    <div>
-      <DataTable data={matriculas} columns={columns} />
-    </div>
-  )
+  return <DataTable data={matriculas} columns={columns} />
 }

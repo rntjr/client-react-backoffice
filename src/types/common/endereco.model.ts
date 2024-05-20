@@ -25,7 +25,7 @@ export const EnderecoSchema = z.object({
   /**
    * Complemento
    */
-  complemento: z.string().optional(),
+  complemento: z.string().nullish(),
   /**
    * Numero do endereco
    */

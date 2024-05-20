@@ -8,23 +8,23 @@ export const MatriculaSchema = z.object({
   ativo: z.boolean().readonly(),
   numeroMatricula: z.string().readonly(),
   dataAdmissao: z.date(),
-  dataPosse: z.date().optional(),
-  dataNomeacao: z.date().optional(),
+  dataPosse: z.date().nullish(),
+  dataNomeacao: z.date().nullish(),
   pessoa: PessoaSchema,
   decreto: z
     .object({
-      numero: z.string().optional(),
-      ano: z.number().optional(),
-      dataDecreto: z.date().optional(),
+      numero: z.string().nullish(),
+      ano: z.number().nullish(),
+      dataDecreto: z.date().nullish(),
     })
-    .optional(),
+    .nullish(),
   cargos: z
     .array(
       z.object({
-        id: z.string(),
+        id: z.string().readonly(),
         atual: z.boolean().default(false),
         dataInicio: z.date(),
-        dataFim: z.date().optional(),
+        dataFim: z.date().nullish(),
         cargo: CargoSchema,
       }),
     )
@@ -32,10 +32,10 @@ export const MatriculaSchema = z.object({
   lotacoes: z.array(
     z
       .object({
-        id: z.string(),
+        id: z.string().readonly(),
         atual: z.boolean().default(false),
         dataInicio: z.date(),
-        dataFim: z.date().optional(),
+        dataFim: z.date().nullish(),
         organograma: OrganogramaSchema,
       })
       .nullish(),

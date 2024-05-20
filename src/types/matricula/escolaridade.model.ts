@@ -6,13 +6,13 @@ export const EscolaridadeSchema = z.object({
   /**
    * Nivel de Escolaridade
    */
-  escolaridade: EscolaridadeEnum.optional(),
+  escolaridade: EscolaridadeEnum.nullish(),
   /**
    * Concelho ou Ordem Profissional
    */
-  concelhoOrdemProfissional: TipoConcelhoOrdemProfissionalEnum.optional(),
+  concelhoOrdemProfissional: TipoConcelhoOrdemProfissionalEnum.nullish(),
   /**
    * Numero do Registro do Concelho ou Ordem Profissional
    */
-  numeroRegistroConcelhoOrdemProfissional: z.string().optional(),
+  numeroRegistroConcelhoOrdemProfissional: z.string().nullish(),
 })

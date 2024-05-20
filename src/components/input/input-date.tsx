@@ -37,7 +37,7 @@ export const InputDate = ({ name, control, label }: InputDateProps) => (
                 variant={'outline'}
                 size={'sm'}
                 className={cn(
-                  'w-[240px] pl-3 text-left font-normal shadow-sm',
+                  'w-full pl-3 text-left font-normal shadow-sm',
                   !field.value && 'text-muted-foreground',
                 )}
               >

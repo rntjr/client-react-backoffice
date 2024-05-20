@@ -10,11 +10,11 @@ export const DependenteSchema = z.object({
   /**
    * Codigo sequencial de Identificacao
    */
-  id: z.string(),
+  id: z.string().readonly(),
   /**
    * Titular do dependente
+   * pessoa: PessoaSchema,
    */
-  pessoa: PessoaSchema,
   /**
    * Nome completo do dependente
    */
@@ -22,7 +22,7 @@ export const DependenteSchema = z.object({
   /**
    * Sexo
    */
-  sexo: SexoEnum.optional(),
+  sexo: SexoEnum.nullish(),
   /**
    * CPF (Documento Unico de Identificacao no Brasil)
    */
@@ -34,23 +34,23 @@ export const DependenteSchema = z.object({
   /**
    * Grau de Parentesco do dependente
    */
-  parentesco: ParentescoEnum.optional(),
+  parentesco: ParentescoEnum.nullish(),
   /**
    * Grau de Escolaridade do dependente
    */
-  escolaridade: EscolaridadeEnum.optional(),
+  escolaridade: EscolaridadeEnum.nullish(),
   /**
    * Estado Civil
    */
-  estadoCivil: EstadoCivilEnum.optional(),
+  estadoCivil: EstadoCivilEnum.nullish(),
   /**
    * Grau de Dependencia do Dependente
    */
-  dependencia: GrauDependenciaEnum.optional(),
+  dependencia: GrauDependenciaEnum.nullish(),
   /**
    * Naturalidade (Informa o Local de Nascimento)
    */
-  naturalidade: z.string().optional(),
+  naturalidade: z.string().nullish(),
   /**
    * Dependente universitario
    */
@@ -58,11 +58,11 @@ export const DependenteSchema = z.object({
   /**
    * Data Limite para Salario Familia
    */
-  dataLimiteSalarioFamilia: z.date().optional(),
+  dataLimiteSalarioFamilia: z.date().nullish(),
   /**
    * Data Limite para IRPF
    */
-  dataLimiteIRPF: z.date().optional(),
+  dataLimiteIRPF: z.date().nullish(),
   /**
    * Dependente Financeiro
    */
@@ -72,3 +72,5 @@ export const DependenteSchema = z.object({
    */
   isDependentePcD: z.boolean(),
 })
+
+export type DependenteType = z.infer<typeof DependenteSchema>

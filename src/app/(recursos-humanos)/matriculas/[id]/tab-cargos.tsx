@@ -79,14 +79,13 @@ export const TabCargos = () => {
 
   return (
     <div className={'flex flex-col gap-2'}>
-      <div className={'flex flex-col items-end justify-between md:flex-row'}>
-        <InputReadOnly
-          label={'Cargo Atual'}
-          value={findCargoAtual({ cargos: cargosWatch })}
-        />
-        <Button variant={'secondary'} className={'min-w-[200px]'}>
-          Adicionar
-        </Button>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className={'col-span-1'}>
+          <InputReadOnly
+            label={'Cargo Atual'}
+            value={findCargoAtual({ cargos: cargosWatch })}
+          />
+        </div>
       </div>
       <DataTable data={cargosWatch} columns={columns} />
     </div>

@@ -5,21 +5,21 @@ export const TituloEleitorSchema = z.object({
   /**
    * Numero Titulo de Eleitor
    */
-  numeroTituloEleitor: z.string().optional(),
+  numeroTituloEleitor: z.string().nullish(),
   /**
    * Zona Titulo de Eleitor
    */
-  zonaTituloEleitor: z.string().optional(),
+  zonaTituloEleitor: z.string().nullish(),
   /**
    * Secao Titulo de Eleitor
    */
-  secaoTituloEleitor: z.string().optional(),
+  secaoTituloEleitor: z.string().nullish(),
   /**
    * Data de Expedicao do Titulo de Eleitor
    */
-  dataExpedicaoTituloEleitor: z.date().optional(),
+  dataExpedicaoTituloEleitor: z.date().nullish(),
   /**
    * UF Titulo de Eleitor
    */
-  ufTituloEleitor: UnidadeFederativaEnum.optional(),
+  ufTituloEleitor: UnidadeFederativaEnum.nullish(),
 })

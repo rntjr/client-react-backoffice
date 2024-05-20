@@ -13,13 +13,17 @@ type InputDateProps = {
   label: string
   name: string
   placeholder?: string
+  disabled?: boolean
+  readOnly?: boolean
 }
 
 export const InputText = ({
   control,
+  disabled,
   name,
   label,
   placeholder,
+  readOnly,
 }: InputDateProps) => (
   <FormField
     control={control}
@@ -28,7 +32,12 @@ export const InputText = ({
       <FormItem className="flex flex-col">
         <FormLabel>{label}</FormLabel>
         <FormControl>
-          <Input placeholder={placeholder} {...field} />
+          <Input
+            placeholder={placeholder}
+            {...field}
+            disabled={disabled}
+            readOnly={readOnly}
+          />
         </FormControl>
         <FormMessage />
       </FormItem>

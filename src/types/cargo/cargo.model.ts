@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { CboSchema } from '@/types/cargo/cbo.model'
 
 export const CargoSchema = z.object({
-  id: z.string(),
+  id: z.string().readonly(),
   ativo: z.boolean().default(false),
   cbo: CboSchema,
   organograma: OrganogramaSchema,

@@ -49,15 +49,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { ReactNode } from 'react'
+import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  adicionarDialogContent?: () => ReactNode
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  adicionarDialogContent,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] =
@@ -141,7 +145,24 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <div className={'flex flex-col gap-4 md:flex-row'}>
+        <div className={'grow'}>
+          {adicionarDialogContent && (
+            <Dialog>
+              <DialogTrigger className={'flex flex-row justify-start'}>
+                <Button
+                  variant={'secondary'}
+                  className={'w-full md:min-w-[200px]'}
+                >
+                  Adicionar
+                </Button>
+              </DialogTrigger>
+              {adicionarDialogContent()}
+            </Dialog>
+          )}
+        </div>
+        <DataTablePagination table={table} />
+      </div>
     </div>
   )
 }

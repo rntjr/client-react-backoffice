@@ -4,9 +4,9 @@ export const NacionalidadeSchema = z.object({
   /**
    * Nacionalidade
    */
-  nacionalidade: NacionalidadeEnum.optional(),
+  nacionalidade: NacionalidadeEnum.nullish(),
   /**
    * Naturalidade (Informa o Local de Nascimento)
    */
-  naturalidade: z.string().optional(),
+  naturalidade: z.string().nullish(),
 })

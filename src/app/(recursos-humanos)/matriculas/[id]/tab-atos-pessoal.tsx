@@ -9,6 +9,7 @@ import { InputSelect } from '@/components/input/input-select'
 import { InputText } from '@/components/input/input-text'
 import { InputSupervisor } from '@/components/input/input-supervisor'
 import { InputTextarea } from '@/components/input/input-textarea'
+import { InputSimNao } from '@/components/input/input-sim-nao'
 
 export const TabAtosPessoal = () => {
   const form = useFormContext<MatriculaType>()
@@ -60,8 +61,8 @@ export const TabAtosPessoal = () => {
             />
           </div>
           <div className="col-span-1">
-            <InputSwitch
-              name={'dataAdmissao'}
+            <InputSimNao
+              name={'isRemunerado'}
               label={'Remunerado?'}
               control={form.control}
             />
