@@ -7,6 +7,9 @@ import PageRootComponent from '@/components/page/page-root'
 
 export const PageComponent = {
   Root: PageRootComponent,
+  Header: {
+    Actions: PageHeaderActionsComponent,
+  },
   HeaderRoot: PageHeaderRootComponent,
   HeaderTitle: PageHeaderTitleComponent,
   HeaderActions: PageHeaderActionsComponent,

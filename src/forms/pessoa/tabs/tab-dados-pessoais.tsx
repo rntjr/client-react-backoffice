@@ -3,9 +3,8 @@ import { PessoaType } from '@/types/matricula/pessoa.model'
 import { InputSelect } from '@/components/input/input-select'
 import { InputNaturalidade } from '@/components/input/input-naturalidade'
 import { InputNacionalidade } from '@/components/input/input-nacionalidade'
-import { Fieldset } from '@/components/Fieldset'
+import { Fieldset } from '@/components/fieldset'
 import { InputText } from '@/components/input/input-text'
-import { InputSwitch } from '@/components/input/input-switch'
 import { InputSimNao } from '@/components/input/input-sim-nao'
 
 export const TabDadosPessoais = () => {

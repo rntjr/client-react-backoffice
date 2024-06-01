@@ -5,5 +5,5 @@ interface PageContentProps {
 }
 
 export default function PageContentComponent({ children }: PageContentProps) {
-  return <div className="py-2">{children}</div>
+  return <div>{children}</div>
 }

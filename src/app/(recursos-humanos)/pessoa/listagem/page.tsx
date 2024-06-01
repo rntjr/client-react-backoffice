@@ -2,7 +2,6 @@
 import { DataTable, DataTableColumnHeader } from '@/components/ui/data-table'
 import { pessoasMock } from '@/mocks/matriculas.mock'
 import { ColumnDef } from '@tanstack/react-table'
-import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
 import {
   DropdownMenu,

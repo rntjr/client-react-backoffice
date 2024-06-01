@@ -1,4 +1,4 @@
-import { Fieldset } from '@/components/Fieldset'
+import { Fieldset } from '@/components/fieldset'
 import { InputPrevidencia } from '@/components/input/input-previdencia'
 import { useFormContext } from 'react-hook-form'
 import { MatriculaType } from '@/types/matricula/matricula.model'

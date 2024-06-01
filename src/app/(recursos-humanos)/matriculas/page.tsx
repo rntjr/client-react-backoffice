@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/button'
 import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { Badge } from '@/components/ui/badge'
 import Link from 'next/link'
+import { PageComponent } from '@/components/page'
 
 const matriculas = matriculasMock
 
@@ -139,5 +140,14 @@ const columns: ColumnDef<MatriculaType>[] = [
 ]
 
 export default function MatriculasPage() {
-  return <DataTable data={matriculas} columns={columns} />
+  return (
+    <PageComponent.Root>
+      <PageComponent.HeaderRoot>
+        <PageComponent.HeaderTitle title="Matriculas" />
+      </PageComponent.HeaderRoot>
+      <PageComponent.Content>
+        <DataTable data={matriculas} columns={columns} />
+      </PageComponent.Content>
+    </PageComponent.Root>
+  )
 }

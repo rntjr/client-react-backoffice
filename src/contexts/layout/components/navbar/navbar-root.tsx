@@ -17,8 +17,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { Sidenav } from '@/components/sidenav'
 
 export const NavbarRoot = () => {
   const [isDark, setDark] = useState<boolean>(true)

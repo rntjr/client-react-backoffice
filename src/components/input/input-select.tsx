@@ -14,13 +14,24 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
+export type ItemOption = {
+  id: string
+  descricao: string
+}
+
 type InputSelectProps = {
   label: string
   name: string
   control: Control<any>
+  itens?: ItemOption[]
 }
 
-export const InputSelect = ({ control, name, label }: InputSelectProps) => (
+export const InputSelect = ({
+  control,
+  name,
+  label,
+  itens,
+}: InputSelectProps) => (
   <FormField
     control={control}
     name={name}
@@ -34,7 +45,12 @@ export const InputSelect = ({ control, name, label }: InputSelectProps) => (
             </SelectTrigger>
           </FormControl>
           <SelectContent>
-            <SelectItem value="m@example.com">Probatório</SelectItem>
+            {itens &&
+              itens.map((item, index) => (
+                <SelectItem key={index} value={item.id}>
+                  {item.descricao}
+                </SelectItem>
+              ))}
           </SelectContent>
         </Select>
         <FormMessage />

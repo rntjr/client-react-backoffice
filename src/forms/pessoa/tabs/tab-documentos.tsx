@@ -1,4 +1,4 @@
-import { Fieldset } from '@/components/Fieldset'
+import { Fieldset } from '@/components/fieldset'
 import { InputText } from '@/components/input/input-text'
 import { useFormContext } from 'react-hook-form'
 import { PessoaType } from '@/types/matricula/pessoa.model'
